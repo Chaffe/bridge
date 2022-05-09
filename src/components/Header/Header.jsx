@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import {connect} from "react-redux";
-import { Container, Stack, Button } from '@mui/material';
+import { connect } from "react-redux";
+import { Container, Stack, Button, Box } from '@mui/material';
 
 class Header extends React.Component {
     constructor(props) {
@@ -17,13 +17,13 @@ class Header extends React.Component {
     render() {
         return (
             <div style={{backgroundColor: '#202938', padding: '15px 0'}}>
-                <Container maxWidth='xl'>
+                <Container maxWidth='lg'>
                     <Stack
                         direction='row'
                         justifyContent="space-between"
                         alignItems="center"
                     >
-                        <div>Bridge</div>
+                        <Box sx={{p: 2, backgroundColor: '#111828', borderRadius: '5px', color: '#e1e2e4'}}>Bridge</Box>
                         <Button
                             onClick={() => this.signButtonHandler()}
                             variant={this.props.isAuth ? "contained" : 'outlined'}

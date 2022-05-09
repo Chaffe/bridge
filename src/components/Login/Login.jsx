@@ -21,7 +21,7 @@ class Login extends React.Component {
         if (this.state.username === this.creds.username && this.state.password === this.creds.password) {
             this.setState({ error: false });
             this.props.setIsAuth(true);
-            localStorage.setItem('isAuth', true);
+            localStorage.setItem('isAuth', 'true');
             this.props.history.push('/')
         } else {
             this.setState({ error: true })

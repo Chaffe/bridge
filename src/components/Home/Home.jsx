@@ -1,26 +1,33 @@
 import React from 'react';
+import { Container, Stack, Button, Box } from '@mui/material';
 import Header from "../Header/Header.jsx";
+import Balance from "../Balance/Balance.jsx";
+import Message from "../Message/Message.jsx";
+import Board from "../Board/Board.jsx";
 
 class Home extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    // componentDidMount() {
-    //     console.log(this.props);
-    //
-    //     if (localStorage.getItem('isAuth') === 'false') {
-    //         console.log(false)
-    //         localStorage.setItem('isAuth', 'false');
-    //         this.props.history.push('/login')
-    //     }
-    // }
-
     render() {
         return (
             <>
                 <Header />
-                <h2>Main</h2>
+                <Balance />
+                <div style={{padding: '50px 0'}}>
+                    <Container maxWidth={'lg'}>
+                        <Stack
+                            style={{color: '#121212'}}
+                            direction='column'
+                            justifyContent="center"
+                            alignItems="center"
+                        >
+                            <Message />
+                            <Board />
+                        </Stack>
+                    </Container>
+                </div>
             </>
         )
     }
