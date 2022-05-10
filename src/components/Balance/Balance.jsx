@@ -12,7 +12,7 @@ class Balance extends React.Component {
                 alignItems="center"
                 spacing={2}
             >
-                <h2>Balance: {this.props.balance}</h2>
+                <h2>Balance: {this.props.balance}$</h2>
             </Stack>
         )
     }

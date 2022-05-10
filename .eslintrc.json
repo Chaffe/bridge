@@ -15,7 +15,8 @@
         "react"
     ],
     "rules": {
-        "default-param-last": 0
+        "default-param-last": 0,
+        "linebreak-style": 0
     },
     "settings": {
         "react": {

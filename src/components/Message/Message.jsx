@@ -20,11 +20,11 @@ class Message extends React.Component {
                 }
 
                 {this.props.gameStatus === 'win' &&
-                    <h2>Поздравляем! Вы выиграли!</h2>
+                    <h2>Поздравляем! Вы выиграли {this.props.betSum}$!</h2>
                 }
 
                 {this.props.gameStatus === 'lose' &&
-                    <h2>Вы проиграли! :(</h2>
+                    <h2>Вы проиграли {this.props.betSum}$ :(</h2>
                 }
 
                 {this.props.gameStatus === 'draw' &&
@@ -37,7 +37,8 @@ class Message extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        gameStatus: state.gameStatus
+        gameStatus: state.gameStatus,
+        betSum: state.betSum
     }
 }
 

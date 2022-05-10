@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from "react-redux";
 import { Stack, Button, Card, TextField } from '@mui/material';
-import { bridgeApi } from '../../api/api';
+import bridgeApi from '../../api/api';
 
 class Board extends React.Component {
     constructor() {
