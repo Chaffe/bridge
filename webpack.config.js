@@ -1,13 +1,15 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
     mode: 'development',
     entry: ["@babel/polyfill", './src/index.jsx'],
     output: {
         path: path.resolve(__dirname, 'dist'),
-        filename: "[name].[hash].js"
+        filename: "[name].[hash].js",
+        publicPath: "/"
     },
     devServer: {
         port: 3000
@@ -17,7 +19,8 @@ module.exports = {
     // },
     plugins: [
         new HTMLWebpackPlugin({template: "./src/view/index.html"}),
-        new CleanWebpackPlugin()
+        new CleanWebpackPlugin(),
+        new ESLintPlugin()
     ],
     module: {
         rules: [

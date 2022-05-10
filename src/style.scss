@@ -1,3 +1,22 @@
-//body {
-//  background-color: green;
-//}
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #f3f4f6;
+}
+
+.card {
+  height: 400px;
+  width: 300px;
+  border-radius: 10px;
+  background-repeat: no-repeat;
+  background-size: 90%;
+  background-position: center;
+
+  &.active:hover {
+    cursor: pointer;
+    box-shadow: 1px 8px 20px grey;
+  }
+}
