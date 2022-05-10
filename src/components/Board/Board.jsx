@@ -31,6 +31,10 @@ class Board extends React.Component {
         ]
     }
 
+    componentDidMount() {
+        this.props.incrementBalance(this.state.betSum)
+    }
+
     checkButtonHandler(e) {
         this.getCards()
             .then(() => this.checkCardsRange(e.target.id));
@@ -38,26 +42,29 @@ class Board extends React.Component {
 
     checkCard(card) {
         if (isNaN(+card.value)) {
-            return this.highCards.filter(highCard => highCard.card === card.value)[0].value
+            return +this.highCards.filter(highCard => highCard.card === card.value)[0].value
         } else {
-            return card.value
+            return +card.value
         }
     }
 
     checkCardsRange(side) {
-        console.log(this.state.betSum)
         if (this.checkCard(this.state.cardList[0]) > this.checkCard(this.state.cardList[1])) {
             if ( side === 'left' ) {
-                this.props.incrementBalance(this.state.betSum);
+                this.props.incrementBalance(+this.state.betSum);
                 this.props.setGameStatus('win');
             } else {
-                this.props.decrementBalance(this.state.betSum);
+                this.props.decrementBalance(+this.state.betSum);
                 this.props.setGameStatus('lose');
             }
         } else if(this.checkCard(this.state.cardList[0]) < this.checkCard(this.state.cardList[1])) {
-            side === 'left'
-                ? this.props.setGameStatus('lose')
-                : this.props.setGameStatus('win');
+            if ( side === 'left' ) {
+                this.props.decrementBalance(+this.state.betSum);
+                this.props.setGameStatus('lose');
+            } else {
+                this.props.incrementBalance(+this.state.betSum);
+                this.props.setGameStatus('win');
+            }
         } else {
             this.props.setGameStatus('draw')
         }
@@ -88,9 +95,9 @@ class Board extends React.Component {
                         >
                             <div style={{display: 'flex', alignItems: 'center', columnGap: '30px'}}>
                                 <Card
-                                    className='card'
+                                    className={`card ${this.props.gameStatus === 'waiting' ? 'active' : ''}`}
                                     id='left'
-                                    onClick={(e) => this.checkButtonHandler(e)}
+                                    onClick={(e) => this.props.gameStatus === 'waiting' && this.checkButtonHandler(e)}
                                     sx={{
                                         backgroundImage: `url(
                                             ${this.props.gameStatus === 'waiting' 
@@ -136,10 +143,6 @@ class Board extends React.Component {
                                 />
                             </div>
                         </Stack>
-                }
-
-                {this.props.gameStatus === 'waiting' &&
-                    null
                 }
             </div>
         )

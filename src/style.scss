@@ -15,7 +15,7 @@ body {
   background-size: 90%;
   background-position: center;
 
-  &:hover {
+  &.active:hover {
     cursor: pointer;
     box-shadow: 1px 8px 20px grey;
   }

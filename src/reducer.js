@@ -13,17 +13,15 @@ function reducer(state = defaultState, action) {
             };
 
         case 'INCREMENT_BALANCE':
-            console.log(state, action)
             return {
                 ...state,
-                balance: Number(state.balance) + Number(action.balance)
+                balance: state.balance + action.balance
             };
 
         case 'DECREMENT_BALANCE':
-            console.log(state, action)
             return {
                 ...state,
-                balance: Number(state.balance) - Number(action.balance)
+                balance: state.balance - Number(action.balance)
             };
 
         case 'SET_GAME_STATUS':
