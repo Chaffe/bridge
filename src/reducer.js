@@ -1,6 +1,7 @@
 const defaultState = {
     isAuth: false,
     balance: 0,
+    betSum: 0,
     gameStatus: 'waiting'
 }
 
@@ -11,6 +12,18 @@ function reducer(state = defaultState, action) {
                 ...state,
                 isAuth: action.isAuth
             };
+
+        case 'SET_BET_SUM':
+            return {
+                ...state,
+                betSum: action.betSum
+            };
+
+        case 'ZEROING_BALANCE':
+            return {
+                ...state,
+                balance: 0
+            }
 
         case 'INCREMENT_BALANCE':
             return {

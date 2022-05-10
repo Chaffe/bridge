@@ -9,7 +9,6 @@ class Board extends React.Component {
         this.state = {
             cardList: null,
             currentCardIndex: null,
-            betSum: 0
         }
         this.highCards = [
             {
@@ -31,10 +30,6 @@ class Board extends React.Component {
         ]
     }
 
-    componentDidMount() {
-        this.props.incrementBalance(this.state.betSum)
-    }
-
     checkButtonHandler(e) {
         this.getCards()
             .then(() => this.checkCardsRange(e.target.id));
@@ -51,18 +46,18 @@ class Board extends React.Component {
     checkCardsRange(side) {
         if (this.checkCard(this.state.cardList[0]) > this.checkCard(this.state.cardList[1])) {
             if ( side === 'left' ) {
-                this.props.incrementBalance(+this.state.betSum);
+                this.props.incrementBalance(+this.props.betSum);
                 this.props.setGameStatus('win');
             } else {
-                this.props.decrementBalance(+this.state.betSum);
+                this.props.decrementBalance(+this.props.betSum);
                 this.props.setGameStatus('lose');
             }
         } else if(this.checkCard(this.state.cardList[0]) < this.checkCard(this.state.cardList[1])) {
             if ( side === 'left' ) {
-                this.props.decrementBalance(+this.state.betSum);
+                this.props.decrementBalance(+this.props.betSum);
                 this.props.setGameStatus('lose');
             } else {
-                this.props.incrementBalance(+this.state.betSum);
+                this.props.incrementBalance(+this.props.betSum);
                 this.props.setGameStatus('win');
             }
         } else {
@@ -114,11 +109,8 @@ class Board extends React.Component {
 
                             {this.props.gameStatus === 'waiting'
                                 ? <TextField
-                                    value={this.state.betSum}
-                                    onChange={(e) => this.setState({
-                                        ...this.state,
-                                        betSum: e.target.value
-                                    })}
+                                    value={this.props.betSum}
+                                    onChange={(e) => this.props.setBetSum(e.target.value)}
                                     label={'Сумма ставки'} type={'number'}
                                 />
                                 : <Button onClick={(e) => this.restartButtonHandler(e)} id={'restart-button'} variant={'contained'} sx={{height: 'max-content'}}>Сыграть еще</Button>
@@ -129,7 +121,7 @@ class Board extends React.Component {
                                     <Button onClick={(e) => this.checkButtonHandler(e)} id={'right'} variant={'contained'} sx={{height: 'max-content'}}>Справа</Button>
                                 }
                                 <Card
-                                    className='card'
+                                    className={`card ${this.props.gameStatus === 'waiting' ? 'active' : ''}`}
                                     id='right'
                                     onClick={(e) => this.checkButtonHandler(e)}
                                     sx={{
@@ -151,7 +143,8 @@ class Board extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        gameStatus: state.gameStatus
+        gameStatus: state.gameStatus,
+        betSum: state.betSum
     }
 }
 
@@ -159,6 +152,9 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setGameStatus: (gameStatus) => {
             dispatch({ type: 'SET_GAME_STATUS', gameStatus })
+        },
+        setBetSum: (betSum) => {
+            dispatch({ type: 'SET_BET_SUM', betSum })
         },
         incrementBalance: (balance) => {
             dispatch({ type: 'INCREMENT_BALANCE', balance })

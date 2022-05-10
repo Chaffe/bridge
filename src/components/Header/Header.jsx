@@ -11,7 +11,12 @@ class Header extends React.Component {
     signButtonHandler() {
         this.props.setIsAuth(!this.props.isAuth);
         localStorage.setItem('isAuth', !this.props.isAuth);
-        this.props.history.push('/login')
+        this.props.history.push('/login');
+        if (this.props.isAuth) {
+            this.props.setGameStatus('waiting');
+            // this.props.zeroingBalance();
+            // this.props.setBetSum(0)
+        }
     }
 
     render() {
@@ -46,8 +51,18 @@ const mapDispatchToProps = (dispatch) => {
     return {
         setIsAuth: (isAuth) => {
             dispatch({ type: 'SET_IS_AUTH', isAuth })
-        }
+        },
+        setGameStatus: (gameStatus) => {
+            dispatch({ type: 'SET_GAME_STATUS', gameStatus })
+        },
+        // zeroingBalance: () => {
+        //     dispatch({ type: 'ZEROING_BALANCE' })
+        // },
+        // setBetSum: (betSum) => {
+        //     dispatch({ type: 'SET_BET_SUM', betSum })
+        // },
     }
 }
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));
