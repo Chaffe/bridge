@@ -1,15 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://deckofcardsapi.com/api/deck/'
-})
+  baseURL: 'https://deckofcardsapi.com/api/deck/',
+});
 
-export const bridgeApi = {
-    getCards(data) {
-        return api.get(`${data}/draw/?count=2`)
-    },
+const bridgeApi = {
+  getCards(data) {
+    return api.get(`${data}/draw/?count=2`);
+  },
+};
 
-    drawCard(data) {
-      return api.get()
-    }
-}
+export default bridgeApi;
